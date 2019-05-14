@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container fluid>
+    <v-container grid-list-md text-xs-center>
       <v-layout align-center column fill-height>
         <v-flex xs12>
           <v-select
@@ -12,23 +12,21 @@
             outline
           ></v-select>
         </v-flex>
-        <v-flex>
-          <v-card>
-            <v-card-title primary-title>
-              <div>
-                <div>
-                  <img :src="logoURL">
-                </div>
-                <div>
-                  <span v-html="rawHtml"></span>
-                </div>
-                <div v-if="lastSelectedGame">
-                  <v-btn @click="onChange(lastSelectedGame)" round color="primary" dark>draw Again</v-btn>
-                  <v-switch v-model="sort" :label="`Sort`" @change="generateHTML"></v-switch>
-                </div>
-              </div>
-            </v-card-title>
-          </v-card>
+        
+        <v-flex v-if="lastSelectedGame">
+          <div>
+            <div>
+              <span v-html="rawHtml"></span>
+            </div>
+            <p>&nbsp;</p>
+            <div >
+              <v-btn @click="onChange(lastSelectedGame)" round color="primary" dark>draw Again</v-btn>
+              <v-switch v-model="sort" :label="`Sort`" @change="generateHTML" class="justify-center"></v-switch>
+            </div>
+          </div>
+        </v-flex>
+        <v-flex v-else>
+          <img src="./assets/LottoPicker.png">
         </v-flex>
       </v-layout>
     </v-container>
@@ -42,7 +40,6 @@ export default {
   data() {
     return {
       lastSelectedGame: 0,
-      logoURL: require("./assets/texas-lottery-logo.jpg"),
       sort: false,
       Balls: [],
       BallCount: 0,
@@ -63,7 +60,7 @@ export default {
   },
   methods: {
     onChange(e) {
-      let GameName;
+      let GameName; // eslint-disable-line no-unused-vars
       let BallMinNumber;
       let BallMaxNumber;
       let BonusBall;
@@ -79,7 +76,6 @@ export default {
       switch (e) {
         case "1":
           GameName = "Powerball";
-          this.logoURL = require("./assets/powerball.png");
           this.BallCount = 5;
           BallMinNumber = 1;
           BallMaxNumber = 69;
@@ -95,7 +91,6 @@ export default {
           break;
         case "2":
           GameName = "Mega Millions";
-          this.logoURL = require("./assets/mega_millions.png");
           this.BallCount = 5;
           BallMinNumber = 1;
           BallMaxNumber = 70;
@@ -111,7 +106,6 @@ export default {
           break;
         case "3":
           GameName = "Lotto Texas";
-          this.logoURL = require("./assets/lotto_texas.png");
           this.BallCount = 6;
           BallMinNumber = 1;
           BallMaxNumber = 54;
@@ -122,7 +116,6 @@ export default {
           break;
         case "4":
           GameName = "Texas Two Step";
-          this.logoURL = require("./assets/texas_two_step.png");
           this.BallCount = 4;
           BallMinNumber = 1;
           BallMaxNumber = 35;
@@ -138,7 +131,6 @@ export default {
           break;
         case "5":
           GameName = "All or Nothing";
-          this.logoURL = require("./assets/all_or_nothing.png");
           this.BallCount = 12;
           BallMinNumber = 1;
           BallMaxNumber = 24;
@@ -149,7 +141,6 @@ export default {
           break;
         case "6":
           GameName = "Pick 3";
-          this.logoURL = require("./assets/pick3.png");
           this.BallCount = 3;
           BallMinNumber = 0;
           BallMaxNumber = 9;
@@ -165,7 +156,6 @@ export default {
           break;
         case "7":
           GameName = "Daily 4";
-          this.logoURL = require("./assets/daily4.png");
           this.BallCount = 4;
           BallMinNumber = 0;
           BallMaxNumber = 9;
@@ -181,7 +171,6 @@ export default {
           break;
         case "8":
           GameName = "Cash Five";
-          this.logoURL = require("./assets/cash_five.png");
           this.BallCount = 5;
           BallMinNumber = 1;
           BallMaxNumber = 37;
@@ -238,6 +227,7 @@ export default {
       this.rawHtml += `</ul>`;
 
       if (this.HasBonusBall){
+        this.rawHtml += "<p>&nbsp;</p>"
         this.rawHtml += this.BonusBallHTML
       }
     },
@@ -257,86 +247,91 @@ ul.lotto {
 
 ul.lotto li {
   display: inline-block;
-  color: #ff6600;
+  color: #ffffff;
   font-family: "Roboto";
-  font-size: 150%;
+  font-size: 225%;
   font-style: normal;
   font-weight: bold;
   height: 50px;
-  line-height: 175%;
-  width: 37px;
+  line-height: 160%;
+  width: 50px;
   padding-left: 0px;
-  background-image: url(./assets/ball_background.png);
+  background-image: url(./assets/ball_purple.png);
   background-repeat: no-repeat;
   text-align: center;
   margin-right: 10px;
+  margin-top: 10px;
 }
 
 ul.lotto li.powerball {
   display: inline-block;
   color: #ffffff;
   font-family: "Roboto";
-  font-size: 150%;
+  font-size: 225%;
   font-style: normal;
   font-weight: bold;
   height: 50px;
-  line-height: 175%;
-  width: 37px;
+  line-height: 160%;
+  width: 50px;
   padding-left: 0px;
-  background-image: url(./assets/powerball_background.png);
+  background-image: url(./assets/ball_red.png);
   background-repeat: no-repeat;
   text-align: center;
   margin-right: 10px;
+  margin-top: 10px;
 }
 
 ul.lotto li.megaball {
   display: inline-block;
-  color: #15084e;
+  color: #f80404;
   font-family: "Roboto";
-  font-size: 150%;
+  font-size: 225%;
   font-style: normal;
   font-weight: bold;
   height: 50px;
-  line-height: 175%;
-  width: 37px;
+  line-height: 160%;
+  width: 50px;
   padding-left: 0px;
-  background-image: url(./assets/mega_millions_background.png);
+  background-image: url(./assets/ball_yellow.png);
   background-repeat: no-repeat;
   text-align: center;
   margin-right: 10px;
+  margin-top: 10px;
 }
 
 ul.lotto li.bonusball {
   display: inline-block;
-  color: #ffffff;
+  color: #f4f804;
   font-family: "Roboto";
-  font-size: 150%;
+  font-size: 225%;
   font-style: normal;
   font-weight: bold;
   height: 50px;
-  line-height: 175%;
-  width: 37px;
+  line-height: 160%;
+  width: 50px;
   padding-left: 0px;
-  background-image: url(./assets/powerball_background.png);
+  background-image: url(./assets/ball_blue.png);
   background-repeat: no-repeat;
   text-align: center;
   margin-right: 10px;
+  margin-top: 10px;
 }
 
 ul.lotto li.fireball {
   display: inline-block;
-  color: #ffffff;
+  color: #f4f804;
   font-family: "Roboto";
-  font-size: 150%;
+  font-size: 225%;
   font-style: normal;
   font-weight: bold;
   height: 50px;
-  line-height: 250%;
-  width: 63px;
-  padding-left: 15px;
-  background-image: url(./assets/fireball_background.png);
+  line-height: 160%;
+  width: 50px;
+  padding-left: 0px;
+  background-image: url(./assets/ball_red.png);
   background-repeat: no-repeat;
-  text-align: left;
+  text-align: center;
   margin-right: 10px;
+  margin-top: 10px;
 }
 </style>
