@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container grid-list-md text-xs-center>
-      <v-layout align-center column fill-height>
+      <v-layout row align-center column>
         <v-flex xs12>
           <v-select
             :items="games"
@@ -12,7 +12,6 @@
             outline
           ></v-select>
         </v-flex>
-        
         <v-flex v-if="lastSelectedGame">
           <div>
             <div>
